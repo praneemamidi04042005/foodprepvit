@@ -6,13 +6,13 @@ const placeOrder = async (req, res) => {
    const frontend_url = "https://foodprepvit-user.onrender.com"
   try {
     const newOrder = new orderModel({
-      userId: req.body.userId,
+      userId: req.userId,
       items: req.body.items,
       amount: req.body.amount,
       address: req.body.address
     });
     await newOrder.save();
-    await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
+    await userModel.findByIdAndUpdate(req.userId, { cartData: {} });
 
     const line_items = req.body.items.map((item) => ({
       price_data: {
@@ -70,7 +70,7 @@ const verifyOrder = async(req,res)=>{
 
 const userOrders = async(req,res)=>{
   try {
-    const orders = await orderModel.find({userId:req.body.userId})
+    const orders = await orderModel.find({userId:req.userId})
     res.status(200).json({data:orders})
   } catch (error) {
     console.log(error)

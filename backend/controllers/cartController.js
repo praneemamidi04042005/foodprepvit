@@ -2,7 +2,7 @@ const userModel = require('../models/userModel');
 
 const addToCart = async (req, res) => {
     try{
-        let userData = await userModel.findById(req.body.userId)
+        let userData = await userModel.findById(req.userId)
         let cartData = userData.cartData
         if(!cartData[req.body.itemId]){
             cartData[req.body.itemId]=1;
@@ -11,7 +11,7 @@ const addToCart = async (req, res) => {
             cartData[req.body.itemId]+=1 ;   
         }
 
-        await userModel.findByIdAndUpdate(req.body.userId, {cartData})
+        await userModel.findByIdAndUpdate(req.userId, {cartData})
         res.status(200).json({ "message" : "item added to cart"})
     }
     catch(error){
@@ -22,7 +22,7 @@ const addToCart = async (req, res) => {
 
 const getCart = async (req, res) => {
     try {
-        let userData = await userModel.findById(req.body.userId)
+        let userData = await userModel.findById(req.userId)
         let cartData = userData.cartData
         res.status(200).json({cartData})
     } catch (error) {
@@ -33,7 +33,7 @@ const getCart = async (req, res) => {
 
 const removeFromCart = async (req, res) => {
     try {
-        let userData = await userModel.findById(req.body.userId)
+        let userData = await userModel.findById(req.userId)
         let cartData = userData.cartData
         if(cartData[req.body.itemId]>1)
             cartData[req.body.itemId]-=1

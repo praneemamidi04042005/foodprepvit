@@ -3,7 +3,7 @@ const {addToCart, getCart, removeFromCart} = require('../controllers/cartControl
 const cartRouter = express.Router();
 const authMiddleware = require('../middlewares/auth');
 cartRouter.post('/add',authMiddleware,addToCart)
-cartRouter.post('/get',authMiddleware,getCart)
-cartRouter.post('/remove',authMiddleware,removeFromCart)
+cartRouter.get('/get',authMiddleware,getCart)
+cartRouter.remove('/remove',authMiddleware,removeFromCart)
 
 module.exports = cartRouter;
