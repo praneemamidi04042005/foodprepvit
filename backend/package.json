@@ -1,7 +1,13 @@
 {
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
   "scripts": {
     "server":"nodemon server.js"
   },
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "body-parser": "^2.2.0",

@@ -1,16 +1,19 @@
-const jwt = require('jsonwebtoken');
-const authMiddleware = async(req, res, next) => {
+const jwt = require('jsonwebtoken')
+const authMiddelware = async (req,res,next)=>{
     const {token} = req.headers;
     if(!token)
-        return res.status(401).json({"message": 'Token is missing'});
+       return res.status(401).json({"message":"token missing"})
     try {
-        const token_decode = jwt.verify(token, process.env.JWT_TOKEN_SECRET)
+        const token_decode = jwt.verify(
+            token,
+            process.env.JWT_TOKEN_SECRET
+        )
         req.userId = token_decode.id;
         next()
+
     } catch (error) {
         console.log(error)
-        res.status(401).json({"message": 'Token is invalid'})
+        res.status(401).json({"message":"Token is invalid"})
     }
 }
-
-module.exports = authMiddleware;
+module.exports = authMiddelware
