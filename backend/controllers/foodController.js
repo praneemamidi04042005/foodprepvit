@@ -4,7 +4,6 @@ const path = require('path')
 
 const addFood = async(req,res)=>{
     let image_filename =`${req.file.filename}` 
-
     try {
         await foodModel.create({
             name:req.body.name,

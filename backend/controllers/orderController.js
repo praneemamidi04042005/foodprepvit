@@ -4,6 +4,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 const placeOrder = async(req,res)=>{
     const frontend_url = 'https://foodprepvit-user.onrender.com'
+    
 
     try {
         

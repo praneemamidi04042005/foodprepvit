@@ -24,6 +24,13 @@ const Navbar = ({showLogin,setShowLogin}) => {
             <Link to='/' className = {menu ==='home' ? 'active' : ''}  onClick={()=>setMenu('home')} >Home</Link>
             <a href='#food-display' className = {menu ==='menu' ? 'active' : ''} onClick={()=>setMenu('menu')} >Menu</a>
             <a href='#footer' className = {menu ==='contact-us' ? 'active' : ''} onClick={()=>setMenu('contact-us')}>Contact us</a>
+            <a
+          href="#app-download"
+          onClick={() => setMenu("mobile-app")}
+          className={menu === "mobile-app" ? "active" : ""}
+        >
+          mobile-app
+        </a>
         </ul>
         <div className="navbar-right">
             <div className="dot-basket">
