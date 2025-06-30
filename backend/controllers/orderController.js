@@ -5,14 +5,14 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const placeOrder = async (req, res) => {
    const frontend_url = "https://foodprepvit-user.onrender.com"
   try {
-    const newOrder = await orderModel.create({
-      userId: req.userId,
+    const newOrder = new orderModel({
+      userId: req.body.userId,
       items: req.body.items,
       amount: req.body.amount,
       address: req.body.address
     });
-
-    await userModel.findByIdAndUpdate(req.userId, { cartData: {} });
+    await newOrder.save();
+    await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
 
     const line_items = req.body.items.map((item) => ({
       price_data: {
@@ -70,7 +70,7 @@ const verifyOrder = async(req,res)=>{
 
 const userOrders = async(req,res)=>{
   try {
-    const orders = await orderModel.find({userId:req.userId})
+    const orders = await orderModel.find({userId:req.body.userId})
     res.status(200).json({data:orders})
   } catch (error) {
     console.log(error)
@@ -80,7 +80,7 @@ const userOrders = async(req,res)=>{
 
 const listOrders = async(req,res)=>{
   try {
-    const orders = await orderModel.find()
+    const orders = await orderModel.find({})
     res.json({data:orders})
   } catch (error) {
     console.log(error)

@@ -15,11 +15,11 @@ const Add = ({url}) => {
     category:"Salad"
   })
 
-  const onChangeHandler = (e)=>{
-    const {name,value} = e.target;
-    setData((data)=>({...data,[name]:value}))
-  }
-
+  const onChangeHandler = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setData((data) => ({ ...data, [name]: value }));
+  };
   const onSubmitHandler=async(e)=>{
     e.preventDefault();
     const formData = new FormData();
